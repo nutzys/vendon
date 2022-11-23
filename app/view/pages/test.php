@@ -7,16 +7,10 @@
     <title>Tests</title>
 </head>
 <body>
-    <div class="container">
-        <div class="test-container">
-            <?php foreach($data['questions'] as $question):?>
-            <h2><?php echo $question->text?></h2>
-            <form action="<?php echo URLROOT?>/pages/proccess" method="post">
-                <input type="radio" name="option" value="test"><span>Answer</span>
-                <button>Tālāk</button>
-            </form>
-            <?php endforeach;?>
-        </div>
-    </div>
+    <h1><?php echo $data['question'][$data['obj_num']]->text?></h1>
+    <form action="<?php echo URLROOT?>/pages/test/<?php echo $data['test']->test_id?>" method="post">
+        <input type="hidden" name="secret" value="<?php echo $data['obj_num']?>">
+        <button>Next</button>
+    </form>
 </body>
 </html>
