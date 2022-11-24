@@ -32,11 +32,20 @@ class Page
     }
 
     public function getAnswers($questionId, $id){
-        $this->db->query('SELECT name, question_id FROM answers WHERE question_id = :question AND test_id = :id');
+        $this->db->query('SELECT name, question_id, answer_id FROM answers WHERE question_id = :question AND test_id = :id');
         $this->db->bind(':question', $questionId);
         $this->db->bind(':id', $id);
         $rows = $this->db->all();
         return $rows;
     }
+
+    public function getAnswer($questionId, $id){
+        $this->db->query('SELECT answer_id FROM questions WHERE question_id = :qid AND test_id = :tid');
+        $this->db->bind(':qid', $questionId);
+        $this->db->bind(':tid', $id);
+        $row = $this->db->all();
+        return $row;
+    }
+
 
 }
