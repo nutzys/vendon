@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 15rem;
+    width: 25rem;
+}
+
+.test-wrapper form{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.test-wrapper form button{
+    width: 10rem;
+    height: 2rem;
+}
+
+.test-wrapper form button:hover{
+    background-color: rgb(199, 198, 198);
+}
+
+.test-wrapper form label{
+    border-bottom: 1px solid black;
+}
+.answer_fields{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    text-align: center;
+}

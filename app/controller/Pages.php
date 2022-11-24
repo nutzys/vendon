@@ -63,8 +63,7 @@ class Pages extends Controller
                 $score++;
             }
 
-            //Update database with question answer and name
-
+            //Update database with choices
             $this->pageModel->enter($_SESSION['name'], $questionId, $testId, $answerId, $score);
 
             //Check if the test has not ended
@@ -103,14 +102,24 @@ class Pages extends Controller
         $this->view('pages/test', $data);
     }
 
+
+    //Start session with available score, user name
     public function startSession($name, $testid){
         $_SESSION['name'] = $name;
         $maxScore = $this->pageModel->getTestById($testid);
         $_SESSION['max_score'] = $maxScore->max_score;
     }
 
+
+    //Load final score view
     public function score(){
-        $data = [];
-        $this->view('pages/score', $data);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //Logout option
+            unset($_SESSION['name']);
+            unset($_SESSION['max_score']);
+            redirect('pages/index');
+        }
+        
+        $this->view('pages/score');
     }
 }

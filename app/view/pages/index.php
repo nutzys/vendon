@@ -13,8 +13,8 @@
             <h1>Testa uzdevums</h1>
             <form action="<?php echo URLROOT?>/pages/index" method="post">
                 <input type="text" name="name" class="input-field" value="<?php echo $data['name']?>" placeholder="Vārds">
-                <span><?php echo $data['name_error']?></span>
-                <select name="test" class="input-field">
+                <span class="error_msg" style="color: red;"><?php echo $data['name_error']?></span>
+                <select name="test" class="input-field" required>
                     <option value="" disabled selected>Izvēle</option>
                     <?php foreach($data['test'] as $test):?>
                     <option value="<?php echo $test->test_id?>"><?php echo $test->name?></option>
