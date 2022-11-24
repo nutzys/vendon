@@ -34,7 +34,7 @@ class Pages extends Controller
 
             //
             if(empty($data['name_error'])){
-                //Load session, Pass test_id
+                //Load session, Pass test_id, insert user to db
                 self::startSession($data['name'], $data['test_id']);
                 redirect('pages/test/'. $data['test_id']);
                 
@@ -57,10 +57,16 @@ class Pages extends Controller
             $num = $_POST['secret'];
             $answerId = $_POST['input'];
 
+            
             //Check the answer
             if($answerId == $this->pageModel->getAnswer($questionId, $testId)[0]->answer_id){
                 $score++;
             }
+
+            //Update database with question answer and name
+
+            $this->pageModel->enter($_SESSION['name'], $questionId, $testId, $answerId, $score);
+
             //Check if the test has not ended
             if($num >= ($this->pageModel->getTestById($testId)->max_score - 1)){
                 //Test done exit to score
