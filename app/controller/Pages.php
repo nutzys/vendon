@@ -49,29 +49,36 @@ class Pages extends Controller
 
     //Load test view
     public function test($testId){
+        //On post request
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $questionId = $_POST['secret_question'];
             $num = $_POST['secret'];
-            $num++;
+            $questionId++;
+            $num++; 
             $data = [
                 'question' => $this->pageModel->getTest($testId),
                 'test' => $this->pageModel->getTestById($testId),
-                'obj_num' => $num
+                'answers' => $this->pageModel->getAnswers($questionId, $testId),
+                'secret_num' => $questionId,
+                'obj_num' => $num 
             ]; 
             $this->view('pages/test', $data);
 
         }
+        $firstQuestionId = $this->pageModel->getTest($testId)[0]->question_id;
         $data = [
             'question' => $this->pageModel->getTest($testId),
             'test' => $this->pageModel->getTestById($testId),
+            'answers' => $this->pageModel->getAnswers($firstQuestionId, $testId),
+            'secret_num' => $firstQuestionId,
             'obj_num' => 0
         ]; 
         $this->view('pages/test', $data);
-
     }
 
     public function startSession($name){
         $_SESSION['name'] = $name;
     }
 
-    //first object text, second obj text
+    //current test first question id
 }
